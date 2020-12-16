@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background: url(images/timg\ \(5\).jpg);
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+        #from{
+            height: 300px;
+            width: 400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            margin-right: 100px;
+        }
+        .p0{
+            float: left;
+            height: 50px;
+            width: 80px;
+            text-align: center;
+            line-height: 50px;
+			color: rgb(245, 125, 145);
+            font-size: 15px;
+        }
+        input{
+            height: 50px;
+            width: 220px;
+            outline-style: none;
+            border: 0 none;
+        }
+        #sub{
+            background-color: pink;
+            color: white;
+            width: 310px;
+            border: 0px;
+        }
+        #p1,#p2{
+            list-style-type: none;
+            font-size: 9px;
+            height: 30px;
+            color: grey;
+        }
+        .box1{
+            width: 300px;
+            border: 1px solid pink;
+        }
+        #div1{
+            width: 1100px;
+            height: 600px;
+            border: 10px double pink;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            display: block;
+        }
+        .tips{
+            font-weight : bolder;
+            text-decoration : underline;
+            color: red;
+            font-size:18px;
+        }
+        
+        .box{
+            width:500px;
+            height:500px;
+            margin:100px 0;
+        }
+        #btn{
+            width:100px;
+            height:100px;
+            margin:0;
+            font-size:20px;
+            color:#fff;
+            text-align:center;
+            line-height:100px;
+            border-radius:100px;
+            background:pink;
+        }
+        #btn:hover{
+            box-shadow: 0 0 10px pink;
+            cursor:pointer;
+        }
+        h1{
+            font-size:120px;
+            color:red;
+            text-align:center;
+        }
+        h1.active{
+            animation:count .5s;
+        }
+        @keyframes count {
+            from {
+                transform: scale(.1);
+                opacity: 1;
+            }
+            to {
+                transform: scale(3.5);
+                opacity: 0;
+                display:none;
+            }
+        }
+
+        #div2{
+            display: none;
+        }
+        #main{
+            width:1150px;
+            margin:auto;
+        }
+        #small{
+            height:120px; 
+        }
+        img{
+            float:left;
+            margin-right:10px;
+            margin-bottom:10px;
+        }
+        #small img:hover{
+            cursor:pointer;
+        }
+        .pb {
+            border:3px solid red;
+        }
+        #small img{
+            width:180px;
+            height:100px;
+        }
+        #big{
+            width:1140px;
+            height:600px;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">
+        <div id="btn">倒计时</div>
+        <div class="box">
+            <h1 id="h1"></h1>
+        </div>
+        <form id="from">
+            <p class="tips">温馨提示：</br>请在100秒内完成注册，否则你将失去注册机会！</p>
+            </br>
+            <div class="box1">
+                <p class="p0">用户名</p>
+                <input type="text" name="usename" value="" id="usename">
+            </div>
+            
+            <p id="p1"></p>
+            <div class="box1">
+                <p class="p0">设置密码</p>
+                <input type="password" name="pass" value="" id="pass">
+            </div>
+            
+            <p id="p2"></p>
+            <input type="button" name="sub" value="立即注册" id="sub">
+        </form>
+    </div>
+    <div id="div2">
+        <div id="main">
+            <div id="small">
+                <img src="images/timgH7T07TUK.jpg" />
+                <img src="images/16081200797.jpg" />
+                <img src="images/timgK1WMSCCE.jpg" />
+                <img src="images/23b3719ee310bff0dc8ddc265ad68d91.jpg" />
+                <img src="images/13d0e12b784d309aa06792a173632bf5.jpg" />
+                <img src="images/1608120467542.jpg" />
+            </div>
+            <div>
+                <img src="images/QQ图片20201216204406.jpg" id="big"/>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var count = 100;
+    var record1 = 1;
+    var record2 = 0;
+    var h1 = document.getElementById("h1");
+    var btn = document.getElementById("btn");
+    
+
+    function actionNum () {
+        var timer = setInterval(function(){
+            count--;
+            if (count >= 0) {
+                h1.classList.remove('active');
+                setTimeout(function(){
+                    var color = "#";
+                    var str = "0123456789abcdef";
+                    for (var i = 0; i < 6; i++) {
+                        color += str.charAt( parseInt(Math.random() * str.length) );
+                    }
+                    h1.innerText = count;
+                    h1.style.color = color;
+                    h1.classList.add('active');
+                }, 100);
+            } else {
+                clearInterval(timer);
+                usename.value = "";
+                pass.value = "";
+                record1 = 0;
+                if(record1 == 0 && record2 == 0) {
+                    alert("注册超时，你已失去注册机会！");
+                }
+            }
+        }, 1000);
+    }
+    actionNum();
+    
+
+    var div1 = document.getElementById("div1");
+    var div2 = document.getElementById("div2");
+    var from = document.getElementById("from");
+    var usename = document.getElementById("usename");
+    var p1 = document.getElementById("p1");
+    var pass = document.getElementById("pass");
+    var p2 = document.getElementById("p2");
+    var sub = document.getElementById("sub");
+    var userText1 = document.createTextNode("支持中文数字");
+    var userText2 = document.createTextNode("用户名不能为空");
+    var passText1 = document.createTextNode("建议使用两种字符组合");
+    var passText2 = document.createTextNode("密码不能为空");
+
+    var i=0;
+
+    usename.onfocus = function() {
+        p1.appendChild(userText1);
+        if(i==1) {
+            p1.removeChild(userText2);
+        }
+        usename.onblur = function() {
+            p1.removeChild(userText1);
+            if(usename.value.length == 0) {
+                p1.appendChild(userText2);
+                i=1;
+            }
+        }
+    }
+
+    pass.onfocus = function() {
+        p2.appendChild(passText1);
+        if(i==1) {
+            p2.removeChild(passText2);
+        }
+        pass.onblur = function() {
+            p2.removeChild(passText1);
+            if(pass.value.length == 0) {
+                p2.appendChild(passText2);
+                i=1;
+            }
+        }
+    }
+
+    sub.onclick = function() {
+        record2 = 1;
+        console.log(record1);
+        console.log(record2);
+        if(usename.value != "" && pass.value != "" && record1 == 1) {
+            alert("恭喜你注册成功！");
+            div1.style.display = "none";
+            div2.style.display = "block";
+        } else{
+            alert("注册失败！");
+        }
+    }
+
+    var small = document.getElementById("small");
+    var imgList = small.getElementsByTagName("img");
+    var big = document.getElementById("big");
+    for(var i = 0; i < imgList.length; i++) {
+        imgList[i].onclick = function() {
+            for(var i = 0; i < imgList.length; i++) {
+                if(imgList[i].hasAttribute("class")) {
+                    imgList[i].removeAttribute("class");
+                }
+            }
+            this.setAttribute("class", "pb");
+            var imgSrc = this.getAttribute("src");
+            big.setAttribute("src", imgSrc);
+        }
+    }
+
+</script>
+</html>
